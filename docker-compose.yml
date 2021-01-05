@@ -1,0 +1,32 @@
+version: '2'
+services:
+    app:
+        build: .
+        depends_on:
+            - database
+        env_file:
+            - .env
+        ports:
+            - 8000:8000
+        volumes:
+            - ./etc/app:/opt/app/etc
+            - ./log/app:/opt/app/log
+            - ./static:/opt/app/static
+            - ./project:/opt/app/project
+        networks:
+            - database
+
+    database:
+        image: postgres:10.10
+        env_file:
+            - .env
+        ports:
+            - 45637:5432
+        volumes:
+            - ./data/database:/var/lib/postgresql/data
+        networks:
+            - database
+
+networks:
+    database:
+        driver: bridge
