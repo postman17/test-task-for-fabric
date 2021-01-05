@@ -9,9 +9,6 @@ services:
         ports:
             - 8000:8000
         volumes:
-            - ./etc/app:/opt/app/etc
-            - ./log/app:/opt/app/log
-            - ./static:/opt/app/static
             - ./project:/opt/app/project
         networks:
             - database
